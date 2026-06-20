@@ -1,4 +1,4 @@
-import express, { Express, Request, Response, NextFunction } from 'express';
+import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import 'dotenv/config';
@@ -6,6 +6,11 @@ import 'dotenv/config';
 import errorHandler from './middlewares/errorHandler';
 import healthRoutes from './routes/healthRoutes';
 import authRoutes from './routes/authRoutes';
+import profileRoutes from './routes/profileRoutes';
+import serviceRoutes from './routes/serviceRoutes';
+import searchRoutes from './routes/searchRoutes';
+import bookingRoutes from './routes/bookingRoutes';
+import orderRoutes from './routes/orderRoutes';
 
 const app: Express = express();
 
@@ -36,9 +41,14 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 app.use('/api/v1/csmp/auth', authRoutes);
 app.use('/api/v1', healthRoutes);
+app.use('/api/v1/csmp/profile', profileRoutes);
+app.use('/api/v1/csmp/services', serviceRoutes);
+app.use('/api/v1/csmp/search', searchRoutes);
+app.use('/api/v1/csmp/bookings', bookingRoutes);
+app.use('/api/v1/csmp/orders', orderRoutes);
 
 // Root route
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (_req: Request, res: Response) => {
   res.json({
     message: 'Welcome to Campus Service Marketplace API',
     version: '1.0.0',

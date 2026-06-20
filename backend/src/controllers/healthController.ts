@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import sendResponse from '../utils/apiResponse';
 import { getRedisClient } from '../config/redis';
 
-export const healthCheck = (req: Request, res: Response): void => {
+export const healthCheck = (_req: Request, res: Response): void => {
   sendResponse(res, 200, 'Server is running successfully ✅', {
     timestamp: new Date().toISOString(),
     uptime: process.uptime(),
@@ -11,7 +11,7 @@ export const healthCheck = (req: Request, res: Response): void => {
   });
 };
 
-export const testConnection = async (req: Request, res: Response): Promise<void> => {
+export const testConnection = async (_req: Request, res: Response): Promise<void> => {
   try {
     const redis = getRedisClient();
 

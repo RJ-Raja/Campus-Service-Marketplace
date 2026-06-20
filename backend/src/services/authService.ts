@@ -1,9 +1,9 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import User, { IUser, UserRole } from '../models/User';
-import { RegisterSchema, LoginSchema } from '../utils/validation';
+import User, { IUser } from '../models/User';
+import { RegisterSchema, LoginSchema, registerSchema, loginSchema } from '../utils/validation';
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET as string;
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
 
 if (!JWT_SECRET) {
@@ -26,7 +26,7 @@ const generateToken = (user: IUser): string => {
       email: user.email,
       role: user.role,
     },
-    JWT_SECRET,
+    JWT_SECRET as jwt.Secret,
     {
       expiresIn: JWT_EXPIRES_IN,
     }
