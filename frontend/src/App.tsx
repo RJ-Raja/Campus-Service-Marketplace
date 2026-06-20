@@ -48,6 +48,18 @@ const App: React.FC = () => {
             >
               Dashboard
             </Link>
+            <Link
+              to="/profile"
+              className="px-4 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition"
+            >
+              Complete Profile
+            </Link>
+            <Link
+              to="/services/create"
+              className="px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600 transition"
+            >
+              Create Service
+            </Link>
           </div>
         </nav>
 

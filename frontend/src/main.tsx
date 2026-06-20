@@ -6,6 +6,11 @@ import APITest from './pages/APITest.tsx';
 import LoginPage from './features/auth/pages/LoginPage.tsx';
 import RegisterPage from './features/auth/pages/RegisterPage.tsx';
 import Dashboard from './pages/Dashboard.tsx';
+import ProfilePage from './features/profiles/pages/ProfilePage.tsx';
+import CreateServicePage from './features/services/pages/CreateServicePage.tsx';
+import SearchPage from './features/search/pages/SearchPage';
+import ServiceDetailPage from './features/search/pages/ServiceDetailPage';
+import OrderWorkspace from './features/orders/pages/OrderWorkspace';
 import ProtectedRoute from './features/auth/components/ProtectedRoute.tsx';
 import { AuthProvider } from './contexts/AuthContext';
 import './index.css';
@@ -27,6 +32,25 @@ function AppRouter() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/services/create"
+            element={
+              <ProtectedRoute>
+                <CreateServicePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/services/:id" element={<ServiceDetailPage />} />
+          <Route path="/orders" element={<ProtectedRoute><OrderWorkspace /></ProtectedRoute>} />
         </Routes>
       </AuthProvider>
     </Router>

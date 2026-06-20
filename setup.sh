@@ -1,3 +1,17 @@
+# Desired runtime versions
+DESIRED_NODE="v24.13.1"
+DESIRED_NPM="11.8.0"
+
+# Check installed versions and warn if different
+CURRENT_NODE=$(node -v 2>/dev/null || echo "none")
+CURRENT_NPM=$(npm -v 2>/dev/null || echo "none")
+if [ "$CURRENT_NODE" != "$DESIRED_NODE" ]; then
+  echo "⚠️  Node version mismatch. Desired: $DESIRED_NODE, Found: $CURRENT_NODE"
+  echo "   Consider using fnm/nvm/volta to switch to $DESIRED_NODE"
+fi
+if [ "$CURRENT_NPM" != "$DESIRED_NPM" ]; then
+  echo "⚠️  npm version mismatch. Desired: $DESIRED_NPM, Found: $CURRENT_NPM"
+fi
 #!/bin/bash
 
 # ============================================
@@ -17,8 +31,8 @@ echo ""
 cd backend
 
 # Use fnm to set Node version
-echo "Using Node v18 with fnm..."
-fnm use 18
+echo "Using Node ${DESIRED_NODE} with fnm..."
+fnm use 24.13.1
 
 # Install dependencies
 echo "Installing backend dependencies..."
@@ -49,8 +63,8 @@ echo ""
 cd ../frontend
 
 # Use fnm to set Node version
-echo "Using Node v18 with fnm..."
-fnm use 18
+  echo "Using Node ${DESIRED_NODE} with fnm..."
+  fnm use 24.13.1
 
 # Install dependencies
 echo "Installing frontend dependencies..."
@@ -83,12 +97,12 @@ echo "   Frontend: cd frontend && edit .env"
 echo ""
 echo "2️⃣  Start the backend (Terminal 1):"
 echo "   cd backend"
-echo "   fnm use 18"
+  echo "   fnm use ${DESIRED_NODE}"
 echo "   npm run dev"
 echo ""
 echo "3️⃣  Start the frontend (Terminal 2):"
 echo "   cd frontend"
-echo "   fnm use 18"
+  echo "   fnm use ${DESIRED_NODE}"
 echo "   npm run dev"
 echo ""
 echo "4️⃣  Open browser:"
