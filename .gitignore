@@ -1,0 +1,46 @@
+# Node.js dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# OS generated files
+ehthumbs.db
+Icon?
+
+# Temporary files
+*.tmp
+~$*
+
+# Frontend/Vite
+coverage/
+**/dist/
+**/.cache/
+
+# Typescript
+*.tsbuildinfo
+
+# Misc
+*.log
+
+# Ignore nested node_modules
+**/node_modules/

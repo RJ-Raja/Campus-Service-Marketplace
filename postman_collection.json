@@ -1,0 +1,140 @@
+{
+  "info": {
+    "_postman_id": "campus-marketplace-api",
+    "name": "Campus Service Marketplace API",
+    "description": "API collection for testing Campus Service Marketplace backend endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health & Connection",
+      "item": [
+        {
+          "name": "Health Check",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response has success property', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.success).to.be.true;",
+                  "});",
+                  "",
+                  "pm.test('Response contains server info', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.data).to.have.property('timestamp');",
+                  "    pm.expect(jsonData.data).to.have.property('uptime');",
+                  "    pm.expect(jsonData.data).to.have.property('environment');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            },
+            "description": "Check if the server is running and healthy"
+          },
+          "response": []
+        },
+        {
+          "name": "Test All Connections",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('All services are connected', function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.success).to.be.true;",
+                  "    pm.expect(jsonData.data.database).to.include('MongoDB');",
+                  "    pm.expect(jsonData.data.redis).to.include('Redis');",
+                  "    pm.expect(jsonData.data.cloudinary).to.include('Configured');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/test-connection",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "test-connection"
+              ]
+            },
+            "description": "Test MongoDB, Redis, and Cloudinary connections"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Root Endpoint",
+      "item": [
+        {
+          "name": "Welcome",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrlRoot}}/",
+              "host": [
+                "{{baseUrlRoot}}"
+              ],
+              "path": [
+                ""
+              ]
+            },
+            "description": "Get welcome message and API information"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "baseUrlRoot",
+      "value": "http://localhost:5000",
+      "type": "string"
+    }
+  ]
+}

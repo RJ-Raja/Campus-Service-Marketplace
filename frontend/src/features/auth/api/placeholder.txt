@@ -1,0 +1,1 @@
+This placeholder ensures the auth api directory is tracked by Git if needed.
